@@ -20,7 +20,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 
-
 /**
  * Classe gérant la fenêtre pricnipale
  * Elle contient l'initialisation de la fenêtre principale ainsi que de ses composants
@@ -32,6 +31,7 @@ import java.text.NumberFormat;
  */
 
 
+@SuppressWarnings("serial")
 public class Fenetre extends JFrame {
 
 	private JSplitPane splitPane;		//objet qui va contenir les deux panels présent sur la fenêtre
@@ -290,13 +290,15 @@ public class Fenetre extends JFrame {
 		leftPanel.bouton11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//création d'une nouvelle fenêtre avec plusieurs champs
 				JFrame frame = new JFrame();
 				frame.setLocationRelativeTo(null);
 				frame.setAlwaysOnTop(true);
 				frame.setTitle("Ajout d'une recette");
 				frame.setSize(1100, 500);
 				frame.setResizable(false);
-
+				
+				//format pour l'input des entiers
 				NumberFormat format = NumberFormat.getIntegerInstance();
 				format.setGroupingUsed(false);
 				
@@ -309,6 +311,7 @@ public class Fenetre extends JFrame {
 				Formulaire ingredient5 = new Formulaire("Cinquième");
 				panel.add(ingredient1.panel);
 				
+				//boutons pour le nom de la recette, le diluant et la température
 				JLabel label = new JLabel("Nom de la recette :");
 				JTextField tf = new JTextField(30);
 				panel.add(label);
@@ -325,6 +328,7 @@ public class Fenetre extends JFrame {
 				panel.add(label3);
 				panel.add(tf3);
 				
+				//ComboBox pour sélectionner le nombre d'ingrédients
 				String[] tab = { "1", "2", "3", "4", "5" };
 
 				JLabel labelMenu = new JLabel("Choix du nombre d'ingrédients");
@@ -344,7 +348,8 @@ public class Fenetre extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						int temp = menu.getSelectedIndex();
 						panel.removeAll();
-									
+						
+						//ajout de champs en fonction du nombre d'ingrédients sélectionnés
 						switch (temp) {
 						
 						case 4:
@@ -382,7 +387,7 @@ public class Fenetre extends JFrame {
 						
 						int temp = menu.getSelectedIndex();
 						String requete = "";
-						
+						//différentes procédures en fonction du nombre d'ingrédients
 						switch (temp) {
 						
 						case 0:
@@ -402,7 +407,7 @@ public class Fenetre extends JFrame {
 							break;
 						}
 						
-						
+						//remplissage de la procédure stockée avec les bons paramètres
 						try {
 							callableStatement = orm.connexion.prepareCall(requete);
 
@@ -465,7 +470,7 @@ public class Fenetre extends JFrame {
 								callableStatement.setInt(23, Integer.parseInt(tf3.getText()));
 								break;
 							}
-							
+							//exécution de la requête
 							callableStatement.executeUpdate();
 
 						} catch (SQLException e1) {

@@ -10,6 +10,7 @@ import javax.swing.table.AbstractTableModel;
  * @param resultSet le ResultSet sur lequel on veut récupérer des informations
  */
 
+@SuppressWarnings("serial")
 public class ResultSetTableModel extends AbstractTableModel {
 
 	private ResultSet resultSet;

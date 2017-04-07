@@ -12,6 +12,7 @@ import javax.swing.JPanel;
  * @author COSTE Maxime
  */
 
+@SuppressWarnings("serial")
 public class LeftPanel extends JPanel implements ActionListener{
 	
 	public JButton bouton1;

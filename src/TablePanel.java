@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
  * @param model la vue que l'on souhaite afficher
  */
 
+@SuppressWarnings("serial")
 public class TablePanel extends JPanel {
 
 	private JTable table;
